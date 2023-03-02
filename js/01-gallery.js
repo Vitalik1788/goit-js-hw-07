@@ -9,8 +9,6 @@ galleryImgList.insertAdjacentHTML('beforeend', cardsMarkup);
 galleryImgList.addEventListener('click', onGalleryContainerClick);
 
 
-
-
 function onCreateImgCards(galleryItems) {
   return galleryItems.map(({preview, original, description}) => {
     return `
@@ -33,11 +31,22 @@ function onGalleryContainerClick(event) {
   if (!event.target.classList.contains('gallery__image')) {
     return;
   }
-  
+
   const instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="800" height="600">`);
   instance.show();  
-};
+
+  galleryImgList.addEventListener('keydown', (evt) => {
+    if (evt.code === "Escape") {
+      instance.close();
+    }
+  });
+  };
+
+
+
+
+
 
 
 
